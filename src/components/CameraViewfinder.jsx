@@ -1,7 +1,7 @@
 import CameraWidgets from './CameraWidgets';
 import React from 'react';
 
-const CameraViewfinder = () => {
+const CameraViewfinder = ({ isVisible}) => {
   return (
     <div style = {styles.viewfinderContainer}>
       {/* Crosshair */}

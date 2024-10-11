@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 
 // CameraController component to handle camera animations
-const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, cameraRef }) => {
+const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, cameraRef, showBox}) => {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -31,6 +31,9 @@ const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, ca
         onUpdate: () => {
           orbitControlsRef.current.update(); // Update controls to reflect new target
         },
+        onComplete: () => {
+          showBox();
+        }
       });
     }
   }, [cameraPosition, targetPosition, camera, orbitControlsRef]);

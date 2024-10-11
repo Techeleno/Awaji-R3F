@@ -22,12 +22,17 @@ const App = () => {
   const orbitControlsRef = useRef(); // Ref for OrbitControls
   const cameraRef = useRef(); // Ref for camera
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const [modelInfo, setModelInfo] = useState(null);
+
   // Store the initial camera and target positions
   const initialCameraPosition = new THREE.Vector3(1, 10, 10); // Initial camera position
   const initialTargetPosition = new THREE.Vector3(0, 0, 0); // Initial target position
 
   const handleButtonClick = (modelName) => {
-    const modelInfo = MODEL_INFO_LIST.find((model) => model.name === modelName);
+    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
+    setModelInfo(modelInfoAsy);
     if (modelInfo) {
       setSelectedModel(modelInfo);
       setShowButtons(false); // Hide buttons when a model is selected
@@ -38,8 +43,13 @@ const App = () => {
     }
   };
 
+  const showBox = () => {
+    setIsVisible(true);
+  }
+
   const handleCloseInfoBox = () => {
     setSelectedModel(null);
+    setIsVisible(false)
 
     // Animate back to the initial camera position and target position
     gsap.to(orbitControlsRef.current.target, {
@@ -85,6 +95,7 @@ const App = () => {
           targetPosition={targetPosition}
           orbitControlsRef={orbitControlsRef}
           cameraRef={cameraRef} // Pass camera ref here
+          showBox={showBox}
         />
       </Canvas>
 
@@ -94,7 +105,11 @@ const App = () => {
       {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
 
       {/* Render the info box */}
-      <InfoBox modelInfo={selectedModel} onClose={handleCloseInfoBox} />
+      <InfoBox
+        modelInfo={modelInfo}
+        isVisible={isVisible}
+        onClose={handleCloseInfoBox}
+      />
     </>
   );
 };
