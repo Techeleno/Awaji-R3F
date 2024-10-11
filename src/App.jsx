@@ -10,6 +10,7 @@ import InfoBox from './components/InfoBox';
 import Model from './components/Model';
 import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
+import CameraViewfinder from './components/CameraViewfinder';
 
 // Main App Component
 const App = () => {
@@ -86,6 +87,8 @@ const App = () => {
           cameraRef={cameraRef} // Pass camera ref here
         />
       </Canvas>
+
+      <CameraViewfinder />
 
       {/* Render the button overlay, conditionally showing based on `showButtons` state */}
       {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
