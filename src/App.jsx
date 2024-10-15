@@ -1,4 +1,4 @@
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls} from '@react-three/drei';
 import * as THREE from 'three';
 import { useState, useRef } from 'react';
@@ -17,7 +17,6 @@ import BlankScreen from './components/BlankScreen';
 // Main App Component
 const App = () => {
   const [buttons, setButtons] = useState([]);
-  const [selectedModel, setSelectedModel] = useState(null);
   const [targetPosition, setTargetPosition] = useState(null);
   const [cameraPosition, setCameraPosition] = useState(null);
   const [showButtons, setShowButtons] = useState(true); // State to track button visibility
@@ -38,7 +37,7 @@ const App = () => {
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
     setModelInfo(modelInfoAsy);
     if (modelInfo) {
-      setSelectedModel(modelInfo);
+      //setViewfinderIsVisible(false);
       setShowButtons(false); // Hide buttons when a model is selected
       // Set the camera and target positions based on the model info
       setTargetPosition(new THREE.Vector3(modelInfo.targetVec.x, modelInfo.targetVec.y, modelInfo.targetVec.z));

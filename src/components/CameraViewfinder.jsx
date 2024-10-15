@@ -36,8 +36,6 @@ const cameraColor = "#3a3c40";
 const styles = {
   viewfinderContainer: {
     position: 'absolute',
-    top: '100vh', // Initial position below the viewport
-    left: 0,
     width: '100%',
     height: '100%',
     pointerEvents: 'none', // Ensure the viewfinder doesn’t block interaction with the canvas
