@@ -1,9 +1,15 @@
 import CameraWidgets from './CameraWidgets';
 import React from 'react';
 
-const CameraViewfinder = ({ isVisible}) => {
+const CameraViewfinder = ({ viewfinderIsVisible }) => {
   return (
-    <div style = {styles.viewfinderContainer}>
+    <div
+      style={{
+        ...styles.viewfinderContainer,
+        top: viewfinderIsVisible ? '0' : '100vh', // Slide up when visible, off-screen when hidden
+        transition: 'top 0.4s ease-in-out', // Smooth slide-up transition
+      }}
+    >
       {/* Crosshair */}
       <div style={styles.crosshairVertical}></div>
       <div style={styles.crosshairHorizontal}></div>
@@ -19,7 +25,8 @@ const CameraViewfinder = ({ isVisible}) => {
 
       <div style={styles.scaleVertical}></div>
       <div style={styles.scaleHorizontal}></div>
-      <CameraWidgets/>
+      
+      <CameraWidgets />
     </div>
   );
 };
@@ -29,7 +36,7 @@ const cameraColor = "#3a3c40";
 const styles = {
   viewfinderContainer: {
     position: 'absolute',
-    top: 0,
+    top: '100vh', // Initial position below the viewport
     left: 0,
     width: '100%',
     height: '100%',

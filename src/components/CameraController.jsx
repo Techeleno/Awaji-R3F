@@ -19,7 +19,11 @@ const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, ca
         y: cameraPosition.y,
         z: cameraPosition.z,
         ease: 'power3.inOut',
+        onComplete: () => {
+            showBox();
+          }
       });
+      
 
       // GSAP animation for the OrbitControls target
       gsap.to(orbitControlsRef.current.target, {

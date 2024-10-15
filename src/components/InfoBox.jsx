@@ -1,4 +1,4 @@
-const InfoBox = ({ modelInfo, isVisible, onClose }) => {
+const InfoBox = ({ modelInfo, isVisible, boxIsVisible, onClose }) => {
     const handleClose = () => {
       // Trigger slide-out effect before closing
       setTimeout(onClose, 300); // Delay close to allow the slide-out animation to complete
@@ -12,7 +12,7 @@ const InfoBox = ({ modelInfo, isVisible, onClose }) => {
         style={{
           position: 'absolute',
           top: '2.5vh',
-          left: isVisible ? '2.5vh' : '-30vw', // Control visibility through isVisible prop
+          left: boxIsVisible ? '2.5vh' : '-30vw', // Control visibility through isVisible prop
           width: '25vw',
           height: '88vh',
           padding: '30px',

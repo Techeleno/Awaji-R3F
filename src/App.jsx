@@ -1,7 +1,7 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls} from '@react-three/drei';
 import * as THREE from 'three';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import gsap from 'gsap';
 import './App.css';
 import { MODEL_INFO_LIST } from './assets/data/ModelInfoHelper';
@@ -11,6 +11,8 @@ import Model from './components/Model';
 import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
+import BlankScreen from './components/BlankScreen';
+
 
 // Main App Component
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
   const cameraRef = useRef(); // Ref for camera
 
   const [isVisible, setIsVisible] = useState(false);
+  const [boxIsVisible, setBoxIsVisible] = useState(false);
+  const [viewfinderIsVisible, setViewfinderIsVisible] = useState(false);
 
   const [modelInfo, setModelInfo] = useState(null);
 
@@ -39,17 +43,21 @@ const App = () => {
       // Set the camera and target positions based on the model info
       setTargetPosition(new THREE.Vector3(modelInfo.targetVec.x, modelInfo.targetVec.y, modelInfo.targetVec.z));
       setCameraPosition(new THREE.Vector3(modelInfo.cameraVec.x, modelInfo.cameraVec.y, modelInfo.cameraVec.z));
-      
     }
   };
 
   const showBox = () => {
     setIsVisible(true);
+    setViewfinderIsVisible(true);
+    setTimeout(() => setViewfinderIsVisible(false), 1500);
+    setTimeout(() => setBoxIsVisible(true), 2000);
   }
 
   const handleCloseInfoBox = () => {
-    setSelectedModel(null);
-    setIsVisible(false)
+    setBoxIsVisible(false);
+    setModelInfo(null);
+    setIsVisible(false);
+    //setViewfinderIsVisible(true);
 
     // Animate back to the initial camera position and target position
     gsap.to(orbitControlsRef.current.target, {
@@ -77,6 +85,7 @@ const App = () => {
       }
     });
   };
+  
 
   return (
     <>
@@ -99,7 +108,9 @@ const App = () => {
         />
       </Canvas>
 
-      <CameraViewfinder />
+      <BlankScreen isVisible={isVisible}/>
+
+      <CameraViewfinder viewfinderIsVisible={viewfinderIsVisible}/>
 
       {/* Render the button overlay, conditionally showing based on `showButtons` state */}
       {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
@@ -108,6 +119,7 @@ const App = () => {
       <InfoBox
         modelInfo={modelInfo}
         isVisible={isVisible}
+        boxIsVisible={boxIsVisible}
         onClose={handleCloseInfoBox}
       />
     </>
