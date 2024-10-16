@@ -12,6 +12,7 @@ import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
+import shutterSound from './assets/audio/SunsetWalk.mp3';
 
 
 // Main App Component

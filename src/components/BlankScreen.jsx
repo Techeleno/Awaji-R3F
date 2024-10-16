@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import shutterSound from '../assets/audio/photo.mp3';
 
 const BlankScreen = ({ isVisible }) => {
   const [opacity, setOpacity] = useState(isVisible ? 0.9 : 0);
   const [display, setDisplay] = useState(isVisible ? 'block' : 'none');
 
   const shuttleWaitTime = 1000;
+
+
+  const audioRef = useRef(new Audio(shutterSound));
+  // Store the previous value of viewfinderIsVisible
+  const prevVisibleRef = useRef(isVisible);
+  // Check if viewfinderIsVisible changed to true
 
   useEffect(() => {
     if (isVisible) {
@@ -15,6 +22,7 @@ const BlankScreen = ({ isVisible }) => {
       const timeout = setTimeout(() => {
         setOpacity(0);
         // Set display to 'none' after the opacity transition
+        audioRef.current.play()
         setTimeout(() => setDisplay('none'), shuttleWaitTime + 200); // Match the duration of your transition
       }, shuttleWaitTime + 200); // Delay before fading out
 

@@ -1,3 +1,5 @@
+const cameraColor = "#3a3c40";
+
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
     const handleClose = () => {
       // Trigger slide-out effect before closing
@@ -47,7 +49,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
   
         {/* Title and content */}
         <div style={{ paddingBottom: '15px' }}>
-          <h2 style={{ margin: 0 }}>{modelInfo.title}</h2>
+          <h2 style={{ margin: 0, color: cameraColor}}>{modelInfo.title}</h2>
         </div>
   
         {/* Image */}
@@ -64,7 +66,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         />
   
         {/* Text content */}
-        <p style={{ paddingTop: '30px', fontSize: '15px' }}>
+        <p style={{ paddingTop: '30px', fontSize: '15px', color: cameraColor }}>
           {modelInfo.text.split('\n').map((line, index) => (
             <span key={index}>
               {line}

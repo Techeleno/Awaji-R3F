@@ -2,7 +2,6 @@ import React from 'react';
 import CameraWidgets from './CameraWidgets';
 
 const CameraViewfinder = ({ viewfinderIsVisible }) => {
-
   const cameraColor = "#3a3c40";
 
   const styles = {
@@ -95,24 +94,27 @@ const CameraViewfinder = ({ viewfinderIsVisible }) => {
       overflow: 'hidden',
       clipPath: 'polygon(60% 0, 100% 0, 100% 100%, 60% 100%)', // Keep only the right 40%
     },
-    scaleVertical: {
+    scaleVertical: (leftPosition) => ({
       position: 'absolute',
       bottom: '5vh',  // Align with the horizontal line's bottom
-      left: '50%',
+      left: leftPosition,
       width: '2px',
       height: 'calc(5vh - 1px)',  // Reduce height slightly to prevent overlap
       transform: 'translate(-50%, 0)',  // No additional vertical shift
       borderLeft: `2px solid ${cameraColor}`,
-    },
+    }),
     scaleHorizontal: {
       position: 'absolute',
       bottom: '5vh',  // Keep this the same
       left: '50%',
-      width: '50vh',
+      width: '50%',
       transform: 'translate(-50%, 0)',  // No vertical shift needed
       borderBottom: `2px solid ${cameraColor}`,
     },
   };
+
+  // Array of left positions for the vertical scale lines
+  const verticalScalePositions = ['35%', '40%', '45%', '50%', '55%', '60%', '65%']; // Customize these positions as needed
 
   return (
     <div style={styles.viewfinderContainer}>
@@ -129,7 +131,11 @@ const CameraViewfinder = ({ viewfinderIsVisible }) => {
       <div style={styles.circleLeft}></div>
       <div style={styles.circleRight}></div>
 
-      <div style={styles.scaleVertical}></div>
+      {/* Render multiple scale vertical lines at different positions */}
+      {verticalScalePositions.map((position, index) => (
+        <div key={index} style={styles.scaleVertical(position)}></div>
+      ))}
+      
       <div style={styles.scaleHorizontal}></div>
 
       <CameraWidgets />
