@@ -36,9 +36,10 @@ const App = () => {
   const handleButtonClick = (modelName) => {
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
     setModelInfo(modelInfoAsy);
+
     if (modelInfo) {
-      //setViewfinderIsVisible(false);
       setShowButtons(false); // Hide buttons when a model is selected
+
       // Set the camera and target positions based on the model info
       setTargetPosition(new THREE.Vector3(modelInfo.targetVec.x, modelInfo.targetVec.y, modelInfo.targetVec.z));
       setCameraPosition(new THREE.Vector3(modelInfo.cameraVec.x, modelInfo.cameraVec.y, modelInfo.cameraVec.z));
@@ -56,7 +57,6 @@ const App = () => {
     setBoxIsVisible(false);
     setModelInfo(null);
     setIsVisible(false);
-    //setViewfinderIsVisible(true);
 
     // Animate back to the initial camera position and target position
     gsap.to(orbitControlsRef.current.target, {
@@ -68,7 +68,6 @@ const App = () => {
       onUpdate: () => {
         orbitControlsRef.current.update(); // Update controls to reflect the reset target
       },
-      
     });
 
     // Use cameraRef to access the camera for GSAP animation
@@ -117,7 +116,6 @@ const App = () => {
       {/* Render the info box */}
       <InfoBox
         modelInfo={modelInfo}
-        isVisible={isVisible}
         boxIsVisible={boxIsVisible}
         onClose={handleCloseInfoBox}
       />

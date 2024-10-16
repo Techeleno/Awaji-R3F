@@ -9,7 +9,6 @@ const BlankScreen = ({ isVisible }) => {
   useEffect(() => {
     if (isVisible) {
       setTimeout(() => setOpacity(0.9), shuttleWaitTime);
-      //setOpacity(0.9);
       setDisplay('block');
 
       // Set a timeout to fade out

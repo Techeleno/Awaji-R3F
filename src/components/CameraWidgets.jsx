@@ -1,4 +1,3 @@
-// BatteryBar.js
 import React from 'react';
 import batteryImage from '../assets/photos/battery.png';
 import recImage from '../assets/photos/rec.png';
@@ -13,7 +12,7 @@ const CameraWidgets = () => {
               width: '8%',
               top: '5vh',
               right: '7vh',
-              position: 'absolute', // or 'absolute' if necessary
+              position: 'absolute', 
               zIndex: 20,
           }} 
         />
@@ -23,7 +22,7 @@ const CameraWidgets = () => {
                 width: '8%',
                 top: '3%',
                 left: '9vh',
-                position: 'absolute', // or 'absolute' if necessary
+                position: 'absolute', 
                 zIndex: 20,
             }} 
         />
