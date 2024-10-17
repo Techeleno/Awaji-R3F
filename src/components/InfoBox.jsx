@@ -34,17 +34,17 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
             top: '10px',
             right: '10px',
             border: 'none',
-            backgroundColor: '#007BFF',
-            fontWeight: 'bold',
-            color: 'white',
+            backgroundColor: 'transparent',
+            //fontWeight: 'bold',
+            color: cameraColor,
             cursor: 'pointer',
             height: '30px',
             width: '30px',
-            fontSize: '20px',
+            fontSize: '30px',
             borderRadius: '5px',
           }}
         >
-          X
+          x
         </button>
   
         {/* Title and content */}

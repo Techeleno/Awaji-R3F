@@ -8,7 +8,7 @@ import { MODEL_INFO_LIST } from '../assets/data/ModelInfoHelper';
 
 // The Model component
 const Model = ({ setButtonPositions }) => {
-    const gltf = useLoader(GLTFLoader, 'src/assets/Awaji.glb');
+    const gltf = useLoader(GLTFLoader, 'src/assets/Visit Awaji.glb');
     const { camera, gl } = useThree();
     const modelRef = useRef();
   
@@ -20,7 +20,8 @@ const Model = ({ setButtonPositions }) => {
   
       // Traverse model children and project their positions to 2D
       model.traverse((child) => {
-        if (child.isMesh && MODEL_INFO_LIST.find(m => m.name === child.name)) {
+
+        if (MODEL_INFO_LIST.find(m => m.name === child.name)) {
           const position = new THREE.Vector3();
           position.setFromMatrixPosition(child.matrixWorld);
   

@@ -12,7 +12,6 @@ import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
-import shutterSound from './assets/audio/SunsetWalk.mp3';
 
 
 // Main App Component
@@ -31,11 +30,14 @@ const App = () => {
   const [modelInfo, setModelInfo] = useState(null);
 
   // Store the initial camera and target positions
-  const initialCameraPosition = new THREE.Vector3(1, 10, 10); // Initial camera position
+  const initialCameraPosition = new THREE.Vector3(-1, 1, 2.5); // Initial camera position
   const initialTargetPosition = new THREE.Vector3(0, 0, 0); // Initial target position
 
   const handleButtonClick = (modelName) => {
+
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
+    console.log(modelInfoAsy)
+    console.log("hello");
     setModelInfo(modelInfoAsy);
 
     if (modelInfo) {
@@ -89,11 +91,19 @@ const App = () => {
   return (
     <>
       {/* The Canvas with the 3D scene */}
-      <Canvas camera={{ position: [1, 10, 10], fov: 75 }}>
+      <Canvas camera={{ position: initialCameraPosition, fov: 75 }}>
         <ThreeScene/>
         
         {/* Pass ref to OrbitControls */}
-        <OrbitControls ref={orbitControlsRef} />
+        <OrbitControls ref={orbitControlsRef} 
+        // minDistance={5} // Restrict how close the camera can zoom in
+        // maxDistance={20} // Restrict how far the camera can zoom out
+        // minPolarAngle={Math.PI / 4} // Restrict the camera from looking too far up
+        // maxPolarAngle={Math.PI / 2} // Restrict the camera from looking too far down
+        // maxAzimuthAngle={Math.PI / 4} // Limit horizontal rotation (optional)
+        // minAzimuthAngle={-Math.PI / 4} // Limit horizontal rotation (optional)
+        
+        />
 
         <Model setButtonPositions={setButtons} />
 

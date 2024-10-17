@@ -8,7 +8,7 @@ const BlankScreen = ({ isVisible }) => {
   const shuttleWaitTime = 1000;
 
 
-  const audioRef = useRef(new Audio(shutterSound));
+  //const audioRef = useRef(new Audio(shutterSound));
   // Store the previous value of viewfinderIsVisible
   const prevVisibleRef = useRef(isVisible);
   // Check if viewfinderIsVisible changed to true
@@ -20,11 +20,12 @@ const BlankScreen = ({ isVisible }) => {
 
       // Set a timeout to fade out
       const timeout = setTimeout(() => {
+        //audioRef.current.play();
         setOpacity(0);
         // Set display to 'none' after the opacity transition
-        audioRef.current.play()
         setTimeout(() => setDisplay('none'), shuttleWaitTime + 200); // Match the duration of your transition
       }, shuttleWaitTime + 200); // Delay before fading out
+
 
       return () => clearTimeout(timeout); // Cleanup timeout on component unmount
     } else {
