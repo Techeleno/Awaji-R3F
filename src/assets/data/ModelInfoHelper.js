@@ -13,7 +13,7 @@ const MieleText = "HELLO \n もし十月が答弁共ははなはだその発見�
 const MieleTheGardenText = "hello hello \n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 
 export const MODEL_INFO_LIST = [new ModelInfo("01_Nojima_Scuola", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
-    new ModelInfo("02_Miele", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
+    new ModelInfo("02_Miele", {x: 0, y: 0, z: 0 }, { x: 0, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
     new ModelInfo("03_Miele_the_Garden", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
     new ModelInfo("04_Miele_the_DINER", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
     new ModelInfo("05_Ocean_Terrace", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nojima Scuola", NojimaScuolaText),
