@@ -25,8 +25,8 @@ const ButtonOverlay = ({ buttons, onButtonClick }) => {
 
           <button
             style={{
-              width: '40px',
-              height: '40px',
+              width: '30px',
+              height: '30px',
               borderRadius: '50%',
               backgroundColor: 'rgba(255, 255, 255, 0.8)',
               border: '2px solid #007BFF',

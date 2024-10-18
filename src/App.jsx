@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls} from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { useState, useRef } from 'react';
 import gsap from 'gsap';
@@ -13,15 +13,13 @@ import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
 
-
-// Main App Component
 const App = () => {
   const [buttons, setButtons] = useState([]);
   const [targetPosition, setTargetPosition] = useState(null);
   const [cameraPosition, setCameraPosition] = useState(null);
-  const [showButtons, setShowButtons] = useState(true); // State to track button visibility
-  const orbitControlsRef = useRef(); // Ref for OrbitControls
-  const cameraRef = useRef(); // Ref for camera
+  const [showButtons, setShowButtons] = useState(true);
+  const orbitControlsRef = useRef();
+  const cameraRef = useRef();
 
   const [isVisible, setIsVisible] = useState(false);
   const [boxIsVisible, setBoxIsVisible] = useState(false);
@@ -29,21 +27,15 @@ const App = () => {
 
   const [modelInfo, setModelInfo] = useState(null);
 
-  // Store the initial camera and target positions
-  const initialCameraPosition = new THREE.Vector3(-1, 1, 2.5); // Initial camera position
-  const initialTargetPosition = new THREE.Vector3(0, 0, 0); // Initial target position
+  const initialCameraPosition = new THREE.Vector3(-0.106, 1.334, 1.918);
+  const initialTargetPosition = new THREE.Vector3(0, 0, 0);
 
   const handleButtonClick = (modelName) => {
-
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
-    console.log(modelInfoAsy)
-    console.log("hello");
     setModelInfo(modelInfoAsy);
 
     if (modelInfo) {
-      setShowButtons(false); // Hide buttons when a model is selected
-
-      // Set the camera and target positions based on the model info
+      setShowButtons(false);
       setTargetPosition(new THREE.Vector3(modelInfo.targetVec.x, modelInfo.targetVec.y, modelInfo.targetVec.z));
       setCameraPosition(new THREE.Vector3(modelInfo.cameraVec.x, modelInfo.cameraVec.y, modelInfo.cameraVec.z));
     }
@@ -54,14 +46,13 @@ const App = () => {
     setViewfinderIsVisible(true);
     setTimeout(() => setViewfinderIsVisible(false), 1500);
     setTimeout(() => setBoxIsVisible(true), 2000);
-  }
+  };
 
   const handleCloseInfoBox = () => {
     setBoxIsVisible(false);
     setModelInfo(null);
     setIsVisible(false);
 
-    // Animate back to the initial camera position and target position
     gsap.to(orbitControlsRef.current.target, {
       duration: 1.5,
       x: initialTargetPosition.x,
@@ -69,11 +60,10 @@ const App = () => {
       z: initialTargetPosition.z,
       ease: 'power3.inOut',
       onUpdate: () => {
-        orbitControlsRef.current.update(); // Update controls to reflect the reset target
+        orbitControlsRef.current.update();
       },
     });
 
-    // Use cameraRef to access the camera for GSAP animation
     gsap.to(cameraRef.current.position, {
       duration: 1.5,
       x: initialCameraPosition.x,
@@ -81,55 +71,62 @@ const App = () => {
       z: initialCameraPosition.z,
       ease: 'power3.inOut',
       onComplete: () => {
-        // Recalculate button positions after camera animation is done
         setShowButtons(true);
       }
     });
   };
-  
+
+  const logCameraAndTarget = () => {
+    if (cameraRef.current && orbitControlsRef.current) {
+      const cameraPosition = cameraRef.current.position;
+      const targetPosition = orbitControlsRef.current.target;
+
+      console.log('Camera Position:', {
+        x: cameraPosition.x,
+        y: cameraPosition.y,
+        z: cameraPosition.z,
+      });
+
+      console.log('Target Position (LookAt):', {
+        x: targetPosition.x,
+        y: targetPosition.y,
+        z: targetPosition.z,
+      });
+    }
+  };
 
   return (
     <>
-      {/* The Canvas with the 3D scene */}
       <Canvas camera={{ position: initialCameraPosition, fov: 75 }}>
-        <ThreeScene/>
-        
-        {/* Pass ref to OrbitControls */}
-        <OrbitControls ref={orbitControlsRef} 
-        // minDistance={5} // Restrict how close the camera can zoom in
-        // maxDistance={20} // Restrict how far the camera can zoom out
-        // minPolarAngle={Math.PI / 4} // Restrict the camera from looking too far up
-        // maxPolarAngle={Math.PI / 2} // Restrict the camera from looking too far down
-        // maxAzimuthAngle={Math.PI / 4} // Limit horizontal rotation (optional)
-        // minAzimuthAngle={-Math.PI / 4} // Limit horizontal rotation (optional)
-        
-        />
-
+        <ThreeScene />
+        <OrbitControls ref={orbitControlsRef} />
         <Model setButtonPositions={setButtons} />
-
-        {/* Camera controller to handle animations */}
         <CameraController
           cameraPosition={cameraPosition}
           targetPosition={targetPosition}
           orbitControlsRef={orbitControlsRef}
-          cameraRef={cameraRef} // Pass camera ref here
+          cameraRef={cameraRef}
           showBox={showBox}
         />
       </Canvas>
 
-      <BlankScreen isVisible={isVisible}/>
-
-      <CameraViewfinder viewfinderIsVisible={viewfinderIsVisible}/>
-
-      {/* Render the button overlay, conditionally showing based on `showButtons` state */}
+      <BlankScreen isVisible={isVisible} />
+      <CameraViewfinder viewfinderIsVisible={viewfinderIsVisible} />
       {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
+      <InfoBox modelInfo={modelInfo} boxIsVisible={boxIsVisible} onClose={handleCloseInfoBox} />
 
-      {/* Render the info box */}
-      <InfoBox
-        modelInfo={modelInfo}
-        boxIsVisible={boxIsVisible}
-        onClose={handleCloseInfoBox}
-      />
+      {/* Button to log camera and target positions */}
+      <button
+        onClick={logCameraAndTarget}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          zIndex: 1,
+        }}
+      >
+        Log Camera and Target
+      </button>
     </>
   );
 };

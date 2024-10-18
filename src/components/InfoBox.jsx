@@ -53,17 +53,24 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         </div>
   
         {/* Image */}
-        <img
-          src={'src/assets/photos/' + modelInfo.name + '.jpg'}
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            margin: '0 auto',
-            borderRadius: '10px',
-            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-          }}
-        />
+        <picture>
+            <source
+                srcSet={'src/assets/photos/' + modelInfo.name + '.webp'}
+                type="image/webp"
+            />
+            <img
+                src={'src/assets/photos/' + modelInfo.name + '.jpg'}
+                alt={modelInfo.name}
+                style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                margin: '0 auto',
+                borderRadius: '10px',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                }}
+            />
+        </picture>
   
         {/* Text content */}
         <p style={{ paddingTop: '30px', fontSize: '15px', color: cameraColor }}>
