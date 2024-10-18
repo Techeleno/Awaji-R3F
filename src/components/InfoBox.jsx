@@ -49,7 +49,14 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
   
         {/* Title and content */}
         <div style={{ paddingBottom: '15px' }}>
-          <h2 style={{ margin: 0, color: cameraColor}}>{modelInfo.title}</h2>
+          <h2 style={{ margin: 0, color: cameraColor}}>
+            {modelInfo.title.split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+          ))}
+          </h2>
         </div>
   
         {/* Image */}
