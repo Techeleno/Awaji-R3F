@@ -12,6 +12,10 @@ import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
 import ButtonOverlay from './components/ButtonOverlay'; 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+library.add(faCircleXmark)
+
 
 const App = () => {
   const [buttons, setButtons] = useState([]);
@@ -31,7 +35,7 @@ const App = () => {
   const initialTargetPosition = new THREE.Vector3(0, 0, 0);
 
   const handleButtonClick = (button) => {
-    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === button.name);
+    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.title === button.name);
     setModelInfo(modelInfoAsy);
 
     if (modelInfoAsy) {

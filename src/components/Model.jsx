@@ -17,10 +17,11 @@ const Model = ({ setButtonPositions }) => {
 
     // Traverse model children and set positions for buttons on each building
     model.traverse((child) => {
-      if (MODEL_INFO_LIST.find(m => m.name === child.name)) {
+      const modelInfo = MODEL_INFO_LIST.find(m => m.name === child.name);
+      if (modelInfo) {
         const position = new THREE.Vector3();
         position.setFromMatrixPosition(child.matrixWorld);  // Get world position
-        newButtonPositions.push({ name: child.name, x: position.x, y: position.y + 0.1, z: position.z });
+        newButtonPositions.push({ name: modelInfo.title, x: position.x, y: position.y + 0.15, z: position.z });
       }
     });
 
