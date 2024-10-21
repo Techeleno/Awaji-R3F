@@ -1,10 +1,10 @@
-/* Reset margin and padding for body and html only */
+/* Reset and global styles */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden; /* Prevent scrollbars from appearing */
+  overflow: hidden;
 }
 
 #root, #app {
@@ -13,7 +13,38 @@ html, body {
 }
 
 canvas {
-  display: block; /* Ensures no extra space around the canvas */
+  display: block;
   height: 100%;
   width: 100%;
+}
+
+/* InfoBox specific styles */
+.infoBox {
+  font-family: 'Lato', sans-serif;
+}
+
+.infoBox h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.0625rem;
+}
+
+.infoBox img {
+  transition: transform 0.2s ease;
+}
+
+.infoBox img:hover {
+  transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.infoBox h2,
+.infoBox p {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
 }
