@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 
 // CameraController component to handle camera animations
-const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, cameraRef, showBox}) => {
+const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, cameraRef, showBox, loadPosition}) => {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -39,8 +39,16 @@ const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, ca
           showBox();
         }
       });
+    } else if (loadPosition) {
+        gsap.to(camera.position, {
+            duration: 2,
+            x: loadPosition.x,
+            y: loadPosition.y,
+            z: loadPosition.z,
+            ease: 'power3.inOut',
+          });
     }
-  }, [cameraPosition, targetPosition, camera, orbitControlsRef]);
+  }, [cameraPosition, targetPosition, camera, orbitControlsRef, loadPosition]);
 
   return null;
 };

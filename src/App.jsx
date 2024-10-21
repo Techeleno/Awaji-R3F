@@ -28,11 +28,13 @@ const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [boxIsVisible, setBoxIsVisible] = useState(false);
   const [viewfinderIsVisible, setViewfinderIsVisible] = useState(false);
+  const [loadPosition, setLoadPosition] = useState(false);
 
   const [modelInfo, setModelInfo] = useState(null);
 
   const initialCameraPosition = new THREE.Vector3(-0.106, 1.334, 1.918);
   const initialTargetPosition = new THREE.Vector3(0, 0, 0);
+  const initialLoadPosition = new THREE.Vector3(-0.690, 1.627, 2.645);
 
   const handleButtonClick = (button) => {
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.title === button.name);
@@ -99,11 +101,22 @@ const App = () => {
     }
   };
 
+  const handleLoadComplete = () => {
+    setLoadPosition(initialCameraPosition);
+    //setLoadPosition(new THREE.Vector3(-0.528,1.564,2.531));
+  };
+  
   return (
     <>
-      <Canvas camera={{ position: initialCameraPosition, fov: 75 }}>
+      <Canvas camera={{ position: initialLoadPosition, fov: 75 }} onCreated={handleLoadComplete}>
         <ThreeScene />
-        <OrbitControls ref={orbitControlsRef} />
+        <OrbitControls 
+          ref={orbitControlsRef} 
+          minPolarAngle={Math.PI / 4} // Set minimum vertical angle (45 degrees)
+          maxPolarAngle={Math.PI / 2} // Set maximum vertical angle (90 degrees)
+          //minDistance={}
+          maxDistance={5}
+        />
         <Model setButtonPositions={setButtons} />
         <CameraController
           cameraPosition={cameraPosition}
@@ -111,6 +124,7 @@ const App = () => {
           orbitControlsRef={orbitControlsRef}
           cameraRef={cameraRef}
           showBox={showBox}
+          loadPosition={loadPosition}
         />
         {/* Render ButtonOverlay within Canvas */}
         {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
