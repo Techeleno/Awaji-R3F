@@ -5,13 +5,13 @@ import { useState, useRef } from 'react';
 import gsap from 'gsap';
 import './App.css';
 import { MODEL_INFO_LIST } from './assets/data/ModelInfoHelper';
-import ButtonOverlay from './components/ButtonOverlay';
 import InfoBox from './components/InfoBox';
 import Model from './components/Model';
 import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
+import ButtonOverlay from './components/ButtonOverlay'; 
 
 const App = () => {
   const [buttons, setButtons] = useState([]);
@@ -30,14 +30,14 @@ const App = () => {
   const initialCameraPosition = new THREE.Vector3(-0.106, 1.334, 1.918);
   const initialTargetPosition = new THREE.Vector3(0, 0, 0);
 
-  const handleButtonClick = (modelName) => {
-    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === modelName);
+  const handleButtonClick = (button) => {
+    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === button.name);
     setModelInfo(modelInfoAsy);
 
-    if (modelInfo) {
+    if (modelInfoAsy) {
       setShowButtons(false);
-      setTargetPosition(new THREE.Vector3(modelInfo.targetVec.x, modelInfo.targetVec.y, modelInfo.targetVec.z));
-      setCameraPosition(new THREE.Vector3(modelInfo.cameraVec.x, modelInfo.cameraVec.y, modelInfo.cameraVec.z));
+      setTargetPosition(new THREE.Vector3(modelInfoAsy.targetVec.x, modelInfoAsy.targetVec.y, modelInfoAsy.targetVec.z));
+      setCameraPosition(new THREE.Vector3(modelInfoAsy.cameraVec.x, modelInfoAsy.cameraVec.y, modelInfoAsy.cameraVec.z));
     }
   };
 
@@ -72,7 +72,7 @@ const App = () => {
       ease: 'power3.inOut',
       onComplete: () => {
         setShowButtons(true);
-      }
+      },
     });
   };
 
@@ -108,11 +108,12 @@ const App = () => {
           cameraRef={cameraRef}
           showBox={showBox}
         />
+        {/* Render ButtonOverlay within Canvas */}
+        {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
       </Canvas>
 
       <BlankScreen isVisible={isVisible} />
       <CameraViewfinder viewfinderIsVisible={viewfinderIsVisible} />
-      {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
       <InfoBox modelInfo={modelInfo} boxIsVisible={boxIsVisible} onClose={handleCloseInfoBox} />
 
       {/* Button to log camera and target positions */}
