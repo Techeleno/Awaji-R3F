@@ -6,7 +6,11 @@ export const MODEL_NAME_LIST = ["01_Nojima_Scuola", "02_Miele", "03_Miele_the_Ga
                                 "16_Zenbo_Seinei", "17_Nijigen_no_Mori", "18_Grand_Chariot"
 ];
 
-const NojimaScuolaText = "hello";
+const NojimaScuolaText = "The popular Marché (market) offers vegetables harvested that morning, freshly baked pastries and Awaji Island's best souvenirs. \n\n" + 
+"Café Scuola on the 1st floor offers casual dining. \n\n" +
+"Ristorante Scuola on the 2nd floor is an Italian restaurant created by Mr. Masayuki Okuda, selected as one of the World's Top 1000 Chefs. Enjoy a wonderful ocean view and live piano music while savoring authentic Italian cuisine made with local Awaji beef and seafood. \n\n" +
+"Drop by the zoo to meet alpacas, goats and other friendly animals. ";
+
 const MieleText = "HELLO \n もし十月が答弁共ははなはだその発見ないでかもがよして切らでをは卒業尊ぶでないて、多少にも述べるありますなでし。申で云っない旨は始めて時間をつるつるますたた。ほとんど岡田君に講演示威始終お話しをなっです自分このがた私か持にというお推察んないだっあって、そんな今日はいつか大学富に出来て、岡田さんの気と秋刀魚の私に至極ご内談と許さと私所がご授業をありようについにご助言へおりずまして、ちょうどどうも妨害が考えまして来るでしょののなさなます。"
 // const MieleTheGardenText = "hello hello \n Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
 const MieleTheDinerText = "HELLO \n ";
@@ -40,9 +44,9 @@ export const MODEL_INFO_LIST = [
     // new ModelInfo("11_Hello_Kitty_Show_Box", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Hello Kitty Show Box", HelloKittyShowBoxText),
     new ModelInfo("12_Hello_Kitty_Apple_House", {x: 0.397, y: 0.198, z: -0.100 }, { x: 0.304, y: 0.115, z: -0.25 }, "Hello Kitty Show Box & \n Hello Kitty Apple House", HelloKittyAppleHouseText),
     new ModelInfo("13_Auberge", {x: 0.204, y: 0.135, z: 0.256 }, { x: 0.380, y: 0.084, z: 0.012 }, "Auberge", AubergeText),
-    new ModelInfo("14_Aman_(Pasona_Square)", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Aman", AmanText),
-    new ModelInfo("15_Haru_San_San", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Haru San San", HaruSanSanText),
-    new ModelInfo("16_Zenbo_Seinei", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Zenbo Seinei", ZenboSeineiText),
-    new ModelInfo("17_Nijigen_no_Mori", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Nijigen no Mori", NijigenNoMoriText),
-    new ModelInfo("18_Grand_Chariot", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Grand Chariot", GrandChariotText),
+    new ModelInfo("14_Aman_(Pasona_Square)", {x: 0.291, y: 0.088, z: 0.579 }, { x: 0.108, y: 0.054, z: 0.391 }, "Aman", AmanText),
+    new ModelInfo("15_Haru_San_San", {x: 0.522, y: 0.137, z: 0.991 }, { x: 0.334, y: 0.077, z: 0.863 }, "Haru San San", HaruSanSanText),
+    new ModelInfo("16_Zenbo_Seinei", {x: 0.741, y: 0.182, z: 0.674 }, { x: 0.631, y: 0.099, z: 0.404 }, "Zenbo Seinei", ZenboSeineiText),
+    new ModelInfo("17_Nijigen_no_Mori", {x: 1.14, y: 0.171, z: 0.125 }, { x: 1.22, y: 0.112, z: -0.287 }, "Nijigen no Mori", NijigenNoMoriText),
+    new ModelInfo("18_Grand_Chariot", {x: 1.122, y: 0.246, z: 0.414 }, { x: 1.125, y: 0.075, z: 0.311 }, "Grand Chariot", GrandChariotText),
 ]; 
