@@ -28,7 +28,7 @@ const CameraViewfinder = ({ viewfinderIsVisible }) => {
       height: '100%',
       pointerEvents: 'none',
       zIndex: 20,
-      top: isAnimating ? '0px' : '97vh', // Slide up or off-screen
+      top: isAnimating ? '0px' : '95vh', // Slide up or off-screen
       opacity: isAnimating ? 1 : 0, // Fade in or out
       visibility: isRendered ? 'visible' : 'hidden', // Control visibility
       transition: 'top 0.4s ease-in-out, opacity 0.4s ease-in-out', // Smooth transitions

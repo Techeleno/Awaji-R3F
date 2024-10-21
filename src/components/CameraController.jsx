@@ -41,7 +41,7 @@ const CameraController = ({ cameraPosition, targetPosition, orbitControlsRef, ca
       });
     } else if (loadPosition) {
         gsap.to(camera.position, {
-            duration: 2,
+            duration: 1.5,
             x: loadPosition.x,
             y: loadPosition.y,
             z: loadPosition.z,
