@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "@fontsource/montserrat";
 import "@fontsource/lato";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import Button from '@mui/material/Button';
-
+import Button from "@mui/material/Button";
 
 const cameraColor = "#3a3c40";
 
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Update local state when boxIsVisible changes
+  useEffect(() => {
+    if (boxIsVisible) {
+      setIsVisible(true);
+    } else {
+      // Delay hiding after the animation completes
+      setTimeout(() => setIsVisible(false), 300); // Matches the transition duration
+    }
+  }, [boxIsVisible]);
+
   const handleClose = () => {
-    setTimeout(onClose, 300);
+    setTimeout(onClose, 300); // Call onClose after 300ms (animation duration)
   };
 
   if (!modelInfo) return null;
 
   return (
     <div
-      className="infoBox"
+      className={`infoBox ${boxIsVisible ? "slide-in" : "slide-out"}`}
       style={{
         position: "absolute",
         top: "2.5vh",
-        left: boxIsVisible ? "2.5vh" : "-30vw",
+        left: isVisible ? "2.5vh" : "-30vw",
         width: "clamp(300px, 25vw, 400px)",
         height: "90vh",
         padding: "2rem",
@@ -55,7 +66,10 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
           {modelInfo.title}
         </h2>
         <button
-          onClick={handleClose}
+          onClick={() => {
+            setIsVisible(false); // Trigger slide-out animation
+            handleClose();
+          }}
           style={{
             border: "none",
             backgroundColor: "transparent",
@@ -75,13 +89,10 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
             (e.currentTarget.style.backgroundColor = "transparent")
           }
         >
-          <FontAwesomeIcon
-            icon={faCircleXmark}
-            style={{ fontSize: "1.5rem" }}
-          />
+          <FontAwesomeIcon icon={faCircleXmark} style={{ fontSize: "1.5rem" }} />
         </button>
       </div>
-
+      
       {modelInfo.hasLogo && (
         <img
           src={`src/assets/logos/${modelInfo.logoFile}`}
@@ -271,6 +282,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
           Visit Website
         </Button>
       </div>
+
     </div>
   );
 };
