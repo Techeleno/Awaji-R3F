@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "@fontsource/montserrat";
 import "@fontsource/lato";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +7,18 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 const cameraColor = "#3a3c40";
 
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
+  const [isVisible, setIsVisible] = useState(boxIsVisible);
+
+  // Update local state when boxIsVisible changes
+  useEffect(() => {
+    if (boxIsVisible) {
+      setIsVisible(true);
+    }
+  }, [boxIsVisible]);
+
   const handleClose = () => {
-    setTimeout(onClose, 300);
+    setIsVisible(false); // Trigger slide-out animation
+    setTimeout(onClose, 300); // Call onClose after 300ms (animation duration)
   };
 
   if (!modelInfo) return null;
@@ -19,7 +29,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
       style={{
         position: 'absolute',
         top: '2.5vh',
-        left: boxIsVisible ? '2.5vh' : '-30vw',
+        left: isVisible ? '2.5vh' : '-30vw',
         width: 'clamp(300px, 25vw, 400px)',
         height: '95vh',
         padding: '2rem',
@@ -79,6 +89,10 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         />
       </picture>
 
+      <p style={{ margin: 0, color: "rgb(65 90 140)", fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: 'clamp(1rem, 1.5vw, 1rem)' }}>
+      A Market, an Italian Restaurant and a Zoo in a Former Elementary School
+      </p>
+
       <p style={{ 
         fontFamily: 'Lato, sans-serif', 
         fontSize: 'clamp(0.875rem, 1.5vw, 1rem)', 
@@ -87,7 +101,12 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         flex: 1,
         overflow: 'auto'
       }}>
-        {modelInfo.text}
+        {modelInfo.text.split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              <br />
+            </span>
+        ))}
       </p>
     </div>
   );

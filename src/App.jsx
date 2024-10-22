@@ -1,53 +1,95 @@
+// External Libraries
+import React, { useState, useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
-import { useState, useRef } from 'react';
 import gsap from 'gsap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
+// Styles
 import './App.css';
+
+// Assets and Data
 import { MODEL_INFO_LIST } from './assets/data/ModelInfoHelper';
+
+// Components
 import InfoBox from './components/InfoBox';
 import Model from './components/Model';
 import ThreeScene from './components/ThreeScene';
 import CameraController from './components/CameraController';
 import CameraViewfinder from './components/CameraViewfinder';
 import BlankScreen from './components/BlankScreen';
-import ButtonOverlay from './components/ButtonOverlay'; 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-library.add(faCircleXmark)
+import ButtonOverlay from './components/ButtonOverlay';
 
+// Add FontAwesome icon to the library
+library.add(faCircleXmark);
+
+// Custom Hooks
+const useCameraPositions = (initialPositions) => {
+  const [cameraPosition, setCameraPosition] = useState(null);
+  const [targetPosition, setTargetPosition] = useState(null);
+  const [loadPosition, setLoadPosition] = useState(initialPositions.load);
+  
+  const resetPositions = () => {
+    setCameraPosition(initialPositions.camera);
+    setTargetPosition(initialPositions.target);
+  };
+
+  return {
+    cameraPosition,
+    targetPosition,
+    loadPosition,
+    setCameraPosition,
+    setTargetPosition,
+    resetPositions,
+    setLoadPosition,
+  };
+};
 
 const App = () => {
+  // State Management
   const [buttons, setButtons] = useState([]);
-  const [targetPosition, setTargetPosition] = useState(null);
-  const [cameraPosition, setCameraPosition] = useState(null);
   const [showButtons, setShowButtons] = useState(true);
-  const orbitControlsRef = useRef();
-  const cameraRef = useRef();
-
   const [isVisible, setIsVisible] = useState(false);
   const [boxIsVisible, setBoxIsVisible] = useState(false);
   const [viewfinderIsVisible, setViewfinderIsVisible] = useState(false);
-  const [loadPosition, setLoadPosition] = useState(false);
-
   const [modelInfo, setModelInfo] = useState(null);
 
-  const initialCameraPosition = new THREE.Vector3(-0.106, 1.334, 1.918);
-  const initialTargetPosition = new THREE.Vector3(0, 0, 0);
-  const initialLoadPosition = new THREE.Vector3(-0.690, 1.627, 2.645);
+  // Refs
+  const orbitControlsRef = useRef();
+  const cameraRef = useRef();
 
+  // Camera Initial Positions
+  const initialPositions = {
+    camera: new THREE.Vector3(-0.106, 1.334, 1.918),
+    target: new THREE.Vector3(0, 0, 0),
+    load: new THREE.Vector3(-0.690, 1.627, 2.645),
+  };
+
+  const {
+    cameraPosition,
+    targetPosition,
+    loadPosition,
+    setCameraPosition,
+    setTargetPosition,
+    resetPositions,
+    setLoadPosition,
+  } = useCameraPositions(initialPositions);
+
+  // Handlers
   const handleButtonClick = (button) => {
-    const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.title === button.name);
-    setModelInfo(modelInfoAsy);
+    const selectedModelInfo = MODEL_INFO_LIST.find((model) => model.title === button.name);
+    setModelInfo(selectedModelInfo);
 
-    if (modelInfoAsy) {
+    if (selectedModelInfo) {
       setShowButtons(false);
-      setTargetPosition(new THREE.Vector3(modelInfoAsy.targetVec.x, modelInfoAsy.targetVec.y, modelInfoAsy.targetVec.z));
-      setCameraPosition(new THREE.Vector3(modelInfoAsy.cameraVec.x, modelInfoAsy.cameraVec.y, modelInfoAsy.cameraVec.z));
+      setTargetPosition(new THREE.Vector3(selectedModelInfo.targetVec.x, selectedModelInfo.targetVec.y, selectedModelInfo.targetVec.z));
+      setCameraPosition(new THREE.Vector3(selectedModelInfo.cameraVec.x, selectedModelInfo.cameraVec.y, selectedModelInfo.cameraVec.z));
     }
   };
 
-  const showBox = () => {
+  const showInfoBox = () => {
     setIsVisible(true);
     setViewfinderIsVisible(true);
     setTimeout(() => setViewfinderIsVisible(false), 1500);
@@ -61,60 +103,37 @@ const App = () => {
 
     gsap.to(orbitControlsRef.current.target, {
       duration: 1.5,
-      x: initialTargetPosition.x,
-      y: initialTargetPosition.y,
-      z: initialTargetPosition.z,
+      ...initialPositions.target,
       ease: 'power3.inOut',
-      onUpdate: () => {
-        orbitControlsRef.current.update();
-      },
+      onUpdate: () => orbitControlsRef.current.update(),
     });
 
     gsap.to(cameraRef.current.position, {
       duration: 1.5,
-      x: initialCameraPosition.x,
-      y: initialCameraPosition.y,
-      z: initialCameraPosition.z,
+      ...initialPositions.camera,
       ease: 'power3.inOut',
-      onComplete: () => {
-        setShowButtons(true);
-      },
+      onComplete: () => setShowButtons(true),
     });
   };
 
   const logCameraAndTarget = () => {
     if (cameraRef.current && orbitControlsRef.current) {
-      const cameraPosition = cameraRef.current.position;
-      const targetPosition = orbitControlsRef.current.target;
-
-      console.log('Camera Position:', {
-        x: cameraPosition.x,
-        y: cameraPosition.y,
-        z: cameraPosition.z,
-      });
-
-      console.log('Target Position (LookAt):', {
-        x: targetPosition.x,
-        y: targetPosition.y,
-        z: targetPosition.z,
-      });
+      console.log('Camera Position:', cameraRef.current.position);
+      console.log('Target Position (LookAt):', orbitControlsRef.current.target);
     }
   };
 
-  const handleLoadComplete = () => {
-    setLoadPosition(initialCameraPosition);
-    //setLoadPosition(new THREE.Vector3(-0.528,1.564,2.531));
-  };
-  
+  const handleLoadComplete = () => setLoadPosition(initialPositions.camera);
+
+  // JSX
   return (
     <>
-      <Canvas camera={{ position: initialLoadPosition, fov: 75 }} onCreated={handleLoadComplete}>
+      <Canvas camera={{ position: loadPosition, fov: 75 }} onCreated={handleLoadComplete}>
         <ThreeScene />
-        <OrbitControls 
-          ref={orbitControlsRef} 
-          minPolarAngle={Math.PI / 4} // Set minimum vertical angle (45 degrees)
-          maxPolarAngle={Math.PI / 2} // Set maximum vertical angle (90 degrees)
-          //minDistance={}
+        <OrbitControls
+          ref={orbitControlsRef}
+          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 2}
           maxDistance={5}
         />
         <Model setButtonPositions={setButtons} />
@@ -123,10 +142,9 @@ const App = () => {
           targetPosition={targetPosition}
           orbitControlsRef={orbitControlsRef}
           cameraRef={cameraRef}
-          showBox={showBox}
+          showBox={showInfoBox}
           loadPosition={loadPosition}
         />
-        {/* Render ButtonOverlay within Canvas */}
         {showButtons && <ButtonOverlay buttons={buttons} onButtonClick={handleButtonClick} />}
       </Canvas>
 
@@ -134,18 +152,9 @@ const App = () => {
       <CameraViewfinder viewfinderIsVisible={viewfinderIsVisible} />
       <InfoBox modelInfo={modelInfo} boxIsVisible={boxIsVisible} onClose={handleCloseInfoBox} />
 
-      {/* Button to log camera and target positions */}
-      <button
-        onClick={logCameraAndTarget}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          right: '10px',
-          zIndex: 1,
-        }}
-      >
+      {/* <button onClick={logCameraAndTarget} style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}>
         Log Camera and Target
-      </button>
+      </button> */}
     </>
   );
 };
