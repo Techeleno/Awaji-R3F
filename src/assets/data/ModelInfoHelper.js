@@ -31,7 +31,35 @@ const GrandChariotText = "";
 
 
 export const MODEL_INFO_LIST = [
-    new ModelInfo("01_Nojima_Scuola", {x: -0.594, y: 0.129, z: 1.355}, { x: -0.55, y: 0.002, z: 1.06 }, "Nojima Scuola", NojimaScuolaText),
+    new ModelInfo(
+        "01_Nojima_Scuola", 
+        { x: -0.594, y: 0.129, z: 1.355 },  // cameraVec
+        { x: -0.55, y: 0.002, z: 1.06 },    // targetVec
+        "Nojima Scuola",                    // title
+        "The popular Marché (market) offers vegetables harvested that morning, freshly baked pastries and Awaji Island's best souvenirs.",       // summaryText
+        "Café Scuola on the 1st floor offers casual dining. \n\n" + // detailsText
+        "Ristorante Scuola on the 2nd floor is an Italian restaurant created by Mr. Masayuki Okuda, selected as one of the World's Top 1000 Chefs. Enjoy a wonderful ocean view and live piano music while savoring authentic Italian cuisine made with local Awaji beef and seafood. \n\n" +
+        "Drop by the zoo to meet alpacas, goats and other friendly animals. ",
+        {                                    // operatingHours
+            Monday: "9:00 AM - 5:00 PM",
+            Tuesday: "9:00 AM - 5:00 PM",
+            Wednesday: "9:00 AM - 5:00 PM",
+            Thursday: "9:00 AM - 5:00 PM",
+            Friday: "9:00 AM - 5:00 PM",
+            Weekend: "11:00 AM - 1:00 PM"
+        },
+        {                                    // contactInfo
+            Address: "123 Scuola St.",
+            Tel: "123-456-7890"
+        },
+        true,                                // hasReservation
+        "https://www.tablecheck.com/en/shops/nojima-scuola/reserve",      // reservationLink
+        "https://en.awajishima-resort.com/shop/nojima-scuola/",   // website
+        true, // hasLogo
+        "nojima_scuola_logo.png" // logoFile
+    ),
+
+
     new ModelInfo("02_Miele", {x: -0.820, y: 0.053, z: 1.224 }, {x: -1.068, y: 0.072, z: 1.013 }, "Miele", MieleText),
     // new ModelInfo("03_Miele_the_Garden", {x: -0.926, y: 0.178, z: 1.133 }, { x: -0.883, y: 0.144, z: 0.801 }, "Nojima Scuola", NojimaScuolaText),
     new ModelInfo("04_Miele_the_DINER", {x: -0.241, y: 0.055, z: 0.960 }, { x: -0.316, y: 0.043, z: 0.730 }, "Miele the DINER", MieleTheDinerText),
