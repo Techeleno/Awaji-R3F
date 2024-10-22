@@ -44,6 +44,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         transition: "left 0.3s ease-in-out",
         display: "flex",
         flexDirection: "column",
+        scrollbarWidth: "none"
       }}
     >
       <div
@@ -136,7 +137,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
           fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
           lineHeight: 1.4,
           marginBottom: "0.75rem",
-          color: cameraColor,
+          color: "rgb(65, 90, 140)",
         }}
       >
         {modelInfo.summaryText}
@@ -267,7 +268,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
             variant="contained"
             color="primary"
             onClick={() => window.open(modelInfo.reservationLink, "_blank")}
-            style={{ flex: 1, borderRadius: "0.45rem" }}
+            style={{ flex: 1, borderRadius: "0.45rem", fontFamily: "'Lato'"}}
           >
             Reserve Now
           </Button>
@@ -277,7 +278,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
           variant="outlined"
           color="primary"
           onClick={() => window.open(modelInfo.website, "_blank")}
-          style={{ flex: 1, borderRadius: "0.45rem" }}
+          style={{ flex: 1, borderRadius: "0.45rem", fontFamily: "'Lato'"}}
           >
           Visit Website
         </Button>
