@@ -9,7 +9,7 @@ export const MODEL_NAME_LIST = ["01_Nojima_Scuola", "02_Miele", "03_Miele_the_Ga
 
 export const MODEL_INFO_LIST = [
     new ModelInfo(
-        "01_Nojima_Scuola", 
+        "01_Nojima_Scuola_(Mesh)", 
         { x: -0.594, y: 0.129, z: 1.355 },  // cameraVec
         { x: -0.55, y: 0.002, z: 1.06 },    // targetVec
         "Nojima Scuola",                    // title
@@ -189,7 +189,7 @@ export const MODEL_INFO_LIST = [
         "",      // reservationLink
         "https://www.awaji-chefgarden.com/",   // website
         true, // hasLogo
-        "nijigen_no_mori_logo.png" // logoFile
+        "chefs-garden-logo.png" // logoFile
     ),
 
     new ModelInfo(
@@ -215,7 +215,7 @@ export const MODEL_INFO_LIST = [
         "https://www.tablecheck.com/en/shops/awaji-seikaiha/reserve",      // reservationLink
         "https://awaji-seikaiha.com/",   // website
         true, // hasLogo
-        "nijigen_no_mori_logo.png" // logoFile
+        "seikaiha-logo.png" // logoFile
     ),
 
     new ModelInfo(
@@ -243,7 +243,7 @@ export const MODEL_INFO_LIST = [
         "",      // reservationLink
         "https://awajicraftcircus.com/",   // website
         true, // hasLogo
-        "nijigen_no_mori_logo.png" // logoFile
+        "craft-circus-logo.png" // logoFile
     ),
 
     // new ModelInfo("11_Hello_Kitty_Show_Box", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Hello Kitty Show Box", HelloKittyShowBoxText),
@@ -297,7 +297,7 @@ export const MODEL_INFO_LIST = [
         "https://frenchnomori.jp/reservation/",      // reservationLink
         "https://frenchnomori.jp/",   // website
         true, // hasLogo
-        "nijigen_no_mori_logo.png" // logoFile
+        "auberge-logo.png" // logoFile
     ),
     
     new ModelInfo(
@@ -323,7 +323,7 @@ export const MODEL_INFO_LIST = [
         true,                                // hasReservation
         "https://www.tablecheck.com/en/shops/aman-utage/reserve",      // reservationLink
         "https://amannoshokutaku.jp/",   // website
-        true, // hasLogo
+        false, // hasLogo
         "nijigen_no_mori_logo.png" // logoFile
     ),
     
@@ -350,8 +350,8 @@ export const MODEL_INFO_LIST = [
         true,                                // hasReservation
         "https://www.tablecheck.com/en/shops/noukarestaurant-haru-sansan/reserve",      // reservationLink
         "https://www.awaji-nlr.com/harusansan",   // website
-        true, // hasLogo
-        "nijigen_no_mori_logo.png" // logoFile
+        false, // hasLogo
+        null // logoFile
 
     ),
 
