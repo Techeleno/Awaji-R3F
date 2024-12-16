@@ -2,7 +2,7 @@ import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
-import { MODEL_INFO_LIST } from '/assets/data/ModelInfoHelper';
+import { MODEL_INFO_LIST } from '../assets/data/ModelInfoHelper';  // From src/assets/data/ModelInfoHelper.js
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
