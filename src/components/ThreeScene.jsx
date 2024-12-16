@@ -3,7 +3,7 @@ import React from 'react';
 
 
 const ThreeScene = () => {
-    const envMap = useEnvironment({ files: "src/assets/environmentMap.hdr"})
+    const envMap = useEnvironment({ files: "/assets/environmentMap.hdr"})
   
     return (
       <>

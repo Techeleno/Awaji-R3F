@@ -10,7 +10,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 
 
 const Model = ({ onBuildingClick }) => {
-  const gltf = useLoader(GLTFLoader, 'src/assets/Visit Awaji.glb');
+  const gltf = useLoader(GLTFLoader, '/assets/Visit Awaji.glb');
   console.log(gltf.scene); 
   const modelRef = useRef();
   const { scene, camera, gl, mouse, raycaster } = useThree();
