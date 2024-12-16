@@ -97,7 +97,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
       
       {modelInfo.hasLogo && (
         <img
-          src={`src/assets/logos/${modelInfo.logoFile}`}
+          src={`/assets/logos/${modelInfo.logoFile}`}
           alt={`${modelInfo.title} Logo`}
           style={{
             width: "150px",
@@ -110,11 +110,11 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
 
       <picture style={{ marginBottom: "1rem" }}>
         <source
-          srcSet={`src/assets/photos/${modelInfo.name}.webp`}
+          srcSet={`/assets/photos/${modelInfo.name}.webp`}
           type="image/webp"
         />
         <img
-          src={`src/assets/photos/${modelInfo.name}.jpg`}
+          src={`/assets/photos/${modelInfo.name}.jpg`}
           alt={modelInfo.name}
           style={{
             width: "100%",
