@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Button from "@mui/material/Button";
 
+
 const cameraColor = "#3a3c40";
 
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {

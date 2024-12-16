@@ -1,3 +1,4 @@
+import React from 'react'; 
 import { useLoader, useFrame, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useRef, useState, useEffect } from 'react';
@@ -6,6 +7,7 @@ import { MODEL_INFO_LIST } from '../assets/data/ModelInfoHelper';  // From src/a
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+
 
 const Model = ({ onBuildingClick }) => {
   const gltf = useLoader(GLTFLoader, 'src/assets/Visit Awaji.glb');

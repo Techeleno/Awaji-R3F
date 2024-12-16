@@ -1,4 +1,6 @@
 import { Environment, useEnvironment } from '@react-three/drei';
+import React from 'react'; 
+
 
 const ThreeScene = () => {
     const envMap = useEnvironment({ files: "src/assets/environmentMap.hdr"})
