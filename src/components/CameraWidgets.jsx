@@ -1,6 +1,6 @@
 import React from 'react';
-import batteryImage from '../assets/photos/battery.png';
-import recImage from '../assets/photos/rec.png';
+import batteryImage from '/assets/photos/battery.png';
+import recImage from '/assets/photos/rec.png';
 
 const CameraWidgets = () => {
   return (

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { useState, useRef } from 'react';
 import gsap from 'gsap';
 import './App.css';
-import { MODEL_INFO_LIST } from './assets/data/ModelInfoHelper';
+import { MODEL_INFO_LIST } from '/assets/data/ModelInfoHelper';
 import InfoBox from './components/InfoBox';
 import Model from './components/Model';
 import ThreeScene from './components/ThreeScene';

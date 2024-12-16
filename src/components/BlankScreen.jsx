@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import shutterSound from '../assets/audio/photo.mp3';
+import shutterSound from '/assets/audio/photo.mp3';
 
 const BlankScreen = ({ isVisible }) => {
   const [opacity, setOpacity] = useState(isVisible ? 0.9 : 0);
