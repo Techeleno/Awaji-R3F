@@ -37,10 +37,36 @@ export const MODEL_INFO_LIST = [
     ),
 
     new ModelInfo(
-        "02_Miele", 
+        "02_Miele_(Mesh)", 
         {x: -0.820, y: 0.053, z: 1.224 }, 
         {x: -1.068, y: 0.072, z: 1.013 }, 
         "miele",                 // title
+        "13 Kinds of Honey and One of \“Japan’s Top 100 Sunset Views\”",       // summaryText
+        "Miele, meaning \“honey\” in Italian, is known for its cuisine and sweets made with fresh, local ingredients and honey produced on Awaji Island. Try the pizza topped with the popular local delicacy of dried fish known as \"shirasu\" while gazing at one of \“Japan’s Top 100 Sunset Views\".",
+        {                                    // operatingHours
+            Monday: "11:00 AM - 7:00 PM",
+            Tuesday: "Closed (Except Aug and Sept)",
+            Wednesday: "11:00 AM - 7:00 PM",
+            Thursday: "11:00 AM - 7:00 PM",
+            Friday: "11:00 AM - 7:00 PM",
+            Weekend: "9:30 AM - 7:30 PM"
+        },
+        {                                    // contactInfo
+            Address: "785-9 Nojimahikinoura, Awaji, Hyogo, 656-1721",
+            Tel: "0799-80-2600"
+        },
+        false,                                // hasReservation
+        "",      // reservationLink
+        "https://www.miele-da-scuola.com/",   // website
+        true, // hasLogo
+        "nojima_scuola_logo.png" 
+    ),
+
+    new ModelInfo(
+        "03_Miele_the_Garden", 
+        {x: -0.926, y: 0.178, z: 1.133 }, 
+        {x: -0.883, y: 0.144, z: 0.801 }, 
+        "Miele the Garden (info needs fixing)",                 // title
         "13 Kinds of Honey and One of \“Japan’s Top 100 Sunset Views\”",       // summaryText
         "Miele, meaning \“honey\” in Italian, is known for its cuisine and sweets made with fresh, local ingredients and honey produced on Awaji Island. Try the pizza topped with the popular local delicacy of dried fish known as \"shirasu\" while gazing at one of \“Japan’s Top 100 Sunset Views\".",
         {                                    // operatingHours
@@ -90,12 +116,11 @@ export const MODEL_INFO_LIST = [
         "nojima_scuola_logo.png" // logoFile
     ),
 
-    // new ModelInfo("03_Miele_the_Garden", {x: -0.926, y: 0.178, z: 1.133 }, { x: -0.883, y: 0.144, z: 0.801 }, "Nojima Scuola", NojimaScuolaText),
     new ModelInfo(
-        "05_Ocean_Terrace", 
+        "05_Ocean_Terrace_(Mesh)", 
         {x: -0.926, y: 0.178, z: 1.133 }, 
         { x: -0.883, y: 0.144, z: 0.801 }, 
-        "Miele the Garden & \n Ocean Terrace", 
+        "Ocean Terrace (Needs info fix)", 
         "An Awaji Beef Steakhouse with a Spectacular Ocean View",
         "Prepare your steak and local vegetables to perfection on a large lava-stone grill overlooking the beautiful ocean sunset at the first “self-grill” style steakhouse in Japan. The view from this spot was selected as one of “Japan’s Top 100 Sunsets”. Enjoy this rare chance to taste Awaji beef which comes from only 200 heads of cattle per year. The top floor features a gorgeous space ideal for a party.",
         {                                    // operatingHours
@@ -118,7 +143,7 @@ export const MODEL_INFO_LIST = [
     ),
     
     new ModelInfo(
-        "06_Hello_Kitty_Smile", 
+        "06_Hello_Kitty_Smile_(Mesh)", 
         {x: -0.451, y: 0.146, z: 0.913 }, 
         { x: -0.55, y: 0.036, z: 0.631 }, 
         "Hello Kitty Smile", 
@@ -146,7 +171,7 @@ export const MODEL_INFO_LIST = [
     ),
 
     new ModelInfo(
-        "07_Ladybird_Road", 
+        "07_Ladybird_Road_(Mesh)", 
         {x: -0.611, y: 0.122, z: 0.428 }, 
         { x: -0.457, y: 0.05, z: 0.119 }, 
         "Ladybird Road",
@@ -248,10 +273,37 @@ export const MODEL_INFO_LIST = [
 
     // new ModelInfo("11_Hello_Kitty_Show_Box", {x: -6, y: 5, z: 5 }, { x: -10, y: 0, z: 0 }, "Hello Kitty Show Box", HelloKittyShowBoxText),
     new ModelInfo(
+        "11_Hello_Kitty_Show_Box", 
+        {x: 0.397, y: 0.198, z: -0.100 }, 
+        { x: 0.304, y: 0.115, z: -0.25 }, 
+        "HELLO KITTY SHOW BOX", 
+        "The World's Largest \"Hello Kitty Apple House\" Appears on Awaji Island's West Coast!",
+        "Enjoy polished performances by HELLO KITTY and her troupe in shows featuring various jazz genres, while tasting a beautiful, healthy vegan course meal. But that's not all! After the show, step up on stage in the Greeting Time to say hello and take a photo with HELLO KITTY herself. The entertainment extravaganza also features multi-media creations of 3D holographic and projection mapping art starring the one and only HELLO KITTY. " +
+        "True fans will be in paradise at the shop, surrounded by a treasure trove of HELLO KITTY goods and other Sanrio character souvenirs.",
+        {                                    // operatingHours
+            Monday: "11:00 AM - 5:00 PM",
+            Tuesday: "11:00 AM - 5:00 PM",
+            Wednesday: "Closed",
+            Thursday: "11:00 AM - 5:00 PM",
+            Friday: "11:00 AM - 5:00 PM",
+            Weekend: "11:00 AM - 5:00 PM"
+        },
+        {                                    // contactInfo
+            Address: "2-2 Nojimahirabayashi, Awaji, Hyogo 656-1724",
+            Tel: "0799-70-9022"
+        },
+        true,                                // hasReservation
+        "https://www.tablecheck.com/en/shops/hellokittyshowbox/reserve",      // reservationLink
+        "https://awajiresort.com/hellokittyshowbox/",   // website
+        true, // hasLogo
+        "nijigen_no_mori_logo.png" // logoFile
+    ),
+
+    new ModelInfo(
         "12_Hello_Kitty_Apple_House", 
         {x: 0.397, y: 0.198, z: -0.100 }, 
         { x: 0.304, y: 0.115, z: -0.25 }, 
-        "HELLO KITTY SHOW BOX & HELLO KITTY APPLE HOUSE", 
+        "HELLO KITTY APPLE HOUSE", 
         "The World's Largest \"Hello Kitty Apple House\" Appears on Awaji Island's West Coast!",
         "Enjoy polished performances by HELLO KITTY and her troupe in shows featuring various jazz genres, while tasting a beautiful, healthy vegan course meal. But that's not all! After the show, step up on stage in the Greeting Time to say hello and take a photo with HELLO KITTY herself. The entertainment extravaganza also features multi-media creations of 3D holographic and projection mapping art starring the one and only HELLO KITTY. " +
         "True fans will be in paradise at the shop, surrounded by a treasure trove of HELLO KITTY goods and other Sanrio character souvenirs.",
