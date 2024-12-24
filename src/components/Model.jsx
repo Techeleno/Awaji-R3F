@@ -83,10 +83,22 @@ const Model = ({ onBuildingClick }) => {
 
   const handleClick = () => {
     if (hoveredObject) {
-      console.log(`Clicked on: ${hoveredObject.name}`); // Log the click
-      onBuildingClick(hoveredObject);  // Pass the object to the parent handler
+      console.log(`Clicked on: ${hoveredObject.name}`);
+      const modelInfo = MODEL_INFO_LIST.find(
+        (m) => m.name === hoveredObject.name
+      );
+      if (modelInfo) {
+        const combinedInfo = {
+          ...modelInfo,
+          model: hoveredObject  // The mesh
+        };
+        onBuildingClick(combinedInfo);  // Pass both modelInfo and model mesh
+        console.log('Passed model to InfoBox:', combinedInfo.model);
+      }
     }
   };
+  
+  
 
   return (
     <primitive

@@ -24,12 +24,22 @@ const App = () => {
 
   const handleBuildingClick = (building) => {
     console.log(`Received click on: ${building.name}`);
+    console.log('Full building object:', building); // Debug log
+    
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === building.name);
     if (modelInfoAsy) {
-      setModelInfo(modelInfoAsy);
+      // Create a new combined object that includes both modelInfo and the model mesh
+      const combinedInfo = {
+        ...modelInfoAsy,
+        model: building.model  // Preserve the model mesh
+      };
+      
+      setModelInfo(combinedInfo);  // Set the combined info
+      console.log('Setting modelInfo with:', combinedInfo); // Debug log
+      
       setTargetPosition(new THREE.Vector3(modelInfoAsy.targetVec.x, modelInfoAsy.targetVec.y, modelInfoAsy.targetVec.z));
       setCameraPosition(new THREE.Vector3(modelInfoAsy.cameraVec.x, modelInfoAsy.cameraVec.y, modelInfoAsy.cameraVec.z));
-      setInputDisabled(true); // Disable user input
+      setInputDisabled(true);
     }
   };
 

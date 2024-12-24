@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import "@fontsource/montserrat";
-import "@fontsource/lato";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import Button from "@mui/material/Button";
-
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@mui/material';
+import BuildingPreview from './BuildingPreview';
 
 const cameraColor = "#3a3c40";
 
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Update local state when boxIsVisible changes
   useEffect(() => {
     if (boxIsVisible) {
       setIsVisible(true);
     } else {
-      // Delay hiding after the animation completes
-      setTimeout(() => setIsVisible(false), 300); // Matches the transition duration
+      setTimeout(() => setIsVisible(false), 300);
     }
   }, [boxIsVisible]);
 
   const handleClose = () => {
-    setTimeout(onClose, 300); // Call onClose after 300ms (animation duration)
+    setTimeout(onClose, 300);
   };
 
   if (!modelInfo) return null;
@@ -48,28 +44,24 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         scrollbarWidth: "none"
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "1rem",
-        }}
-      >
-        <h2
-          style={{
-            margin: 0,
-            color: "rgb(65 90 140)",
-            fontFamily: "Montserrat, sans-serif",
-            fontWeight: 600,
-            fontSize: "clamp(1.25rem, 2vw, 1.5rem)",
-          }}
-        >
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "1rem",
+      }}>
+        <h2 style={{
+          margin: 0,
+          color: "rgb(65 90 140)",
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          fontSize: "clamp(1.25rem, 2vw, 1.5rem)",
+        }}>
           {modelInfo.title}
         </h2>
         <button
           onClick={() => {
-            setIsVisible(false); // Trigger slide-out animation
+            setIsVisible(false);
             handleClose();
           }}
           style={{
@@ -84,17 +76,13 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
             justifyContent: "center",
             transition: "background-color 0.3s ease",
           }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "transparent")
-          }
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.05)"}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
         >
           <FontAwesomeIcon icon={faCircleXmark} style={{ fontSize: "1.5rem" }} />
         </button>
       </div>
-      
+
       {modelInfo.hasLogo && (
         <img
           src={`/assets/logos/${modelInfo.logoFile}`}
@@ -108,41 +96,26 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         />
       )}
 
-      <picture style={{ marginBottom: "1rem" }}>
-        <source
-          srcSet={`/assets/photos/${modelInfo.name}.webp`}
-          type="image/webp"
-        />
-        <img
-          src={`/assets/photos/${modelInfo.name}.jpg`}
-          alt={modelInfo.name}
-          style={{
-            width: "100%",
-            height: "auto",
-            display: "block",
-            borderRadius: "0.625rem",
-            boxShadow: "0 0.25rem 0.625rem rgba(0, 0, 0, 0.1)",
-            transition: "transform 0.3s ease",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.05)")
-          }
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-        />
-      </picture>
-
-      <p
-        style={{
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
-          fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
-          lineHeight: 1.4,
-          marginBottom: "0.75rem",
-          color: "rgb(65, 90, 140)",
-        }}
-      >
+      {modelInfo.model && (
+        <div style={{ height: "300px", marginBottom: "1rem" }}>
+          <BuildingPreview 
+            model={modelInfo.model} 
+            key={modelInfo.name} // Add key to force re-render on model change
+          />
+        </div>
+        
+      )}
+      <p style={{
+        fontFamily: "Montserrat, sans-serif",
+        fontWeight: 600,
+        fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
+        lineHeight: 1.4,
+        marginBottom: "0.75rem",
+        color: "rgb(65, 90, 140)",
+      }}>
         {modelInfo.summaryText}
       </p>
+
       <p
         style={{
           fontFamily: "Lato, sans-serif",
@@ -285,6 +258,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
         </Button>
       </div>
 
+      
     </div>
   );
 };
