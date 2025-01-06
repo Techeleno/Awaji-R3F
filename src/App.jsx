@@ -81,13 +81,17 @@ const App = () => {
       {inputDisabled && <div className="input-blocker" />}
 
       <Canvas camera={{ position: initialCameraPosition, fov: 75 }}>
-        <ThreeScene />
-        <OrbitControls
-          ref={orbitControlsRef}
-          minPolarAngle={Math.PI / 4}
-          maxPolarAngle={Math.PI / 2}
-          maxDistance={5}
-        />
+      <ThreeScene />
+      <OrbitControls
+        ref={orbitControlsRef}
+        minPolarAngle={Math.PI / 6} // Restrict how far down the camera can look
+        maxPolarAngle={Math.PI / 3} // Restrict how far up the camera can look
+        minAzimuthAngle={-Math.PI / 4} // Restrict horizontal rotation (left limit)
+        maxAzimuthAngle={Math.PI / 4} // Restrict horizontal rotation (right limit)
+        maxDistance={4}
+        enableZoom={true}
+      />
+
         <Model onBuildingClick={handleBuildingClick} />
         <CameraController
           cameraPosition={cameraPosition}

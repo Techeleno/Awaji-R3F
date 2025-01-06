@@ -29,7 +29,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
       style={{
         position: "absolute",
         top: "2.5vh",
-        left: isVisible ? "2.5vh" : "-30vw",
+        left: isVisible ? "2.5vh" : "-80vw", // here
         width: "clamp(300px, 25vw, 400px)",
         height: "90vh",
         padding: "2rem",
