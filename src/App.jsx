@@ -15,7 +15,7 @@ const App = () => {
   const [cameraPosition, setCameraPosition] = useState(null);
   const [modelInfo, setModelInfo] = useState(null);
   const [boxIsVisible, setBoxIsVisible] = useState(false);
-  const [inputDisabled, setInputDisabled] = useState(false); // New state to manage user input
+  const [inputDisabled, setInputDisabled] = useState(false);
   const orbitControlsRef = useRef();
   const cameraRef = useRef();
 
@@ -23,20 +23,16 @@ const App = () => {
   const initialTargetPosition = new THREE.Vector3(0, 0, 0);
 
   const handleBuildingClick = (building) => {
-    console.log(`Received click on: ${building.name}`);
-    console.log('Full building object:', building); // Debug log
+    if (modelInfo) return;
     
     const modelInfoAsy = MODEL_INFO_LIST.find((model) => model.name === building.name);
     if (modelInfoAsy) {
-      // Create a new combined object that includes both modelInfo and the model mesh
       const combinedInfo = {
         ...modelInfoAsy,
-        model: building.model  // Preserve the model mesh
+        model: building.model
       };
       
-      setModelInfo(combinedInfo);  // Set the combined info
-      console.log('Setting modelInfo with:', combinedInfo); // Debug log
-      
+      setModelInfo(combinedInfo);
       setTargetPosition(new THREE.Vector3(modelInfoAsy.targetVec.x, modelInfoAsy.targetVec.y, modelInfoAsy.targetVec.z));
       setCameraPosition(new THREE.Vector3(modelInfoAsy.cameraVec.x, modelInfoAsy.cameraVec.y, modelInfoAsy.cameraVec.z));
       setInputDisabled(true);
@@ -45,15 +41,14 @@ const App = () => {
 
   const showBox = () => {
     setBoxIsVisible(true);
-    setInputDisabled(false); // Re-enable user input when box is shown
+    setInputDisabled(false);
   };
 
   const handleCloseInfoBox = () => {
     setBoxIsVisible(false);
     setModelInfo(null);
-    setInputDisabled(true); // Disable input while resetting camera
+    setInputDisabled(true);
 
-    // Reset camera and controls position
     gsap.to(orbitControlsRef.current.target, {
       duration: 1.5,
       x: initialTargetPosition.x,
@@ -63,9 +58,9 @@ const App = () => {
       onUpdate: () => {
         orbitControlsRef.current.update();
       },
-      onComplete: () => setInputDisabled(false), // Re-enable input after reset
+      onComplete: () => setInputDisabled(false),
     });
-    console.log("euns")
+
     gsap.to(cameraRef.current.position, {
       duration: 1.5,
       x: initialCameraPosition.x,
@@ -75,39 +70,63 @@ const App = () => {
     });
   };
 
+  // Handle click outside InfoBox
+  const handleCanvasClick = (e) => {
+    if (boxIsVisible && !e.defaultPrevented) {
+      const infoBox = document.querySelector('.infoBox');
+      if (infoBox && !infoBox.contains(e.target)) {
+        handleCloseInfoBox();
+      }
+    }
+  };
+
   return (
-    <>
-      {/* Input disabling overlay */}
+    <div style={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      width: '100%', 
+      height: '100%',
+      overflow: 'hidden'
+    }}>
       {inputDisabled && <div className="input-blocker" />}
 
-      <Canvas camera={{ position: initialCameraPosition, fov: 75 }}>
-      <ThreeScene />
-      <OrbitControls
-        ref={orbitControlsRef}
-        minPolarAngle={Math.PI / 6} // Restrict how far down the camera can look
-        maxPolarAngle={Math.PI / 3} // Restrict how far up the camera can look
-        minAzimuthAngle={-Math.PI / 4} // Restrict horizontal rotation (left limit)
-        maxAzimuthAngle={Math.PI / 4} // Restrict horizontal rotation (right limit)
-        maxDistance={4}
-        enableZoom={true}
-      />
+      <div onClick={handleCanvasClick} style={{ width: '100%', height: '100%' }}>
+        <Canvas 
+          style={{ position: 'absolute', top: 0, left: 0 }}
+          camera={{ position: initialCameraPosition, fov: 75 }}
+        >
+          <ThreeScene />
+          <OrbitControls
+            ref={orbitControlsRef}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 3}
+            minAzimuthAngle={-Math.PI / 4}
+            maxAzimuthAngle={Math.PI / 4}
+            maxDistance={4}
+            enableZoom={true}
+          />
 
-        <Model onBuildingClick={handleBuildingClick} />
-        <CameraController
-          cameraPosition={cameraPosition}
-          targetPosition={targetPosition}
-          orbitControlsRef={orbitControlsRef}
-          cameraRef={cameraRef}
-          showBox={showBox}
+          <Model 
+            onBuildingClick={handleBuildingClick}
+            modelInfo={modelInfo}
+          />
+          <CameraController
+            cameraPosition={cameraPosition}
+            targetPosition={targetPosition}
+            orbitControlsRef={orbitControlsRef}
+            cameraRef={cameraRef}
+            showBox={showBox}
+          />
+        </Canvas>
+
+        <InfoBox
+          modelInfo={modelInfo}
+          boxIsVisible={boxIsVisible}
+          onClose={handleCloseInfoBox}
         />
-      </Canvas>
-
-      <InfoBox
-        modelInfo={modelInfo}
-        boxIsVisible={boxIsVisible}
-        onClose={handleCloseInfoBox}
-      />
-    </>
+      </div>
+    </div>
   );
 };
 
