@@ -5,6 +5,17 @@ import { Button } from '@mui/material';
 import BuildingPreview from './BuildingPreview';
 
 const cameraColor = "#3a3c40";
+const isMobile = window.innerWidth < 768;
+const viewportWidth = window.innerWidth;
+//const boxWidth = Math.min(400, Math.max(300, viewportWidth * 0.25));
+const boxWidth = 364;
+
+let leftValue = "2.5vh";
+
+if (isMobile) {
+  leftValue = leftValue = `${(viewportWidth - boxWidth) / 2}px`;
+  console.log(leftValue)
+}
 
 const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,7 +40,7 @@ const InfoBox = ({ modelInfo, boxIsVisible, onClose }) => {
       style={{
         position: "absolute",
         top: "2.5vh",
-        left: isVisible ? "2.5vh" : "-80vw", // here
+        left: isVisible ? leftValue : "-100vw", // here
         width: "clamp(300px, 25vw, 400px)",
         height: "90vh",
         padding: "2rem",
